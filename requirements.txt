@@ -1,0 +1,5 @@
+beanie~=1.29.0
+motor~=3.7.0
+pydantic-settings~=2.4.0
+pydantic~=2.7.4
+maxapi==0.9.9

@@ -1,0 +1,12 @@
+# Project cache
+**/.idea/
+**/__pycache__/
+
+# Environment
+**/.venv/
+**/node_modules/
+.env
+
+# Logs folders !!
+logs/*
+!logs/.gitkeep

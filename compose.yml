@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:7
+    restart: always
+    container_name: mongo
+    expose:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  bot:
+    build:
+      context: .
+      dockerfile: bot.dockerfile
+    restart: always
+    depends_on:
+      mongo:
+        condition: service_started
+    env_file:
+      - .env
+    volumes:
+      - ./:/bot
+
+volumes:
+  mongo-data:
