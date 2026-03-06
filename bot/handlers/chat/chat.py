@@ -1,6 +1,6 @@
 from typing import List
 from maxapi import F, Router
-from maxapi.types import UserAdded, Command, MessageCreated
+from maxapi.types import UserAdded, BotAdded, Command, MessageCreated
 from maxapi.enums.message_link_type import MessageLinkType
 
 from bot.filters.chat import IsChat, IsChatAdmin, LinkSenderIsNotAdmin
@@ -76,6 +76,18 @@ async def user_removed(event: UserAdded, chat: Chat):
     await event.bot.send_message(
         chat_id=event.chat.chat_id,
         text=chat.settings.buy_user_text.format(name=event.from_user.first_name),
+    )
+    
+
+@router.bot_added()
+async def bot_added(event: BotAdded):
+    await event.bot.send_message(
+        chat_id=event.chat.chat_id,
+        text=(
+            'Привет всем! Я — Max Bot. 🤖\n\n'
+            'Я помогаю управлять чатом и слежу за репутацией пользователей.\n'
+            'Чтобы узнать, что я умею, введите <code>/help</code>.'
+        )
     )
     
 

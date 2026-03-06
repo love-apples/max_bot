@@ -22,7 +22,12 @@ def format_rep_notification(receiver_name: str, giver_name: str, delta: int) -> 
 
 async def can_change_reputation(chat_id: int, receiver_id: int) -> bool:
     chat = await Chat.find_one(Chat.chat_id == chat_id)
+    if chat is None:
+        return True
+    
     receiver = await User.find_one(User.user_id == receiver_id)
+    if receiver is None:
+        return True
     
     last_event = await ReputationEvent.find(
         ReputationEvent.chat.id == chat.id,
